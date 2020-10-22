@@ -2,10 +2,10 @@ import React from "react";
 
 import TopBar from "../components/AppBar";
 
-const Home = () => {
+const Home = ({ darkMode, setDarkMode }) => {
     return (
         <>
-            <TopBar />
+            <TopBar darkMode={darkMode} setDarkMode={setDarkMode} />
         </>
     );
 };

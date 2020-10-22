@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 import {
     AppBar,
@@ -14,9 +14,7 @@ import { ReactComponent as GroupConf } from "../asset/SVG/groupConf.svg";
 import { ReactComponent as Dark } from "../asset/SVG/dark.svg";
 import { ReactComponent as Light } from "../asset/SVG/light.svg";
 
-const Topbar = () => {
-    const [darkMode, setDarkMode] = useState(false);
-
+const Topbar = ({ darkMode, setDarkMode }) => {
     return (
         <>
             <AppBar position='static'>
