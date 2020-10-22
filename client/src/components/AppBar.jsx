@@ -8,11 +8,11 @@ import {
     Typography,
 } from "@material-ui/core";
 
-import { ReactComponent as IdGen } from "../asset/SVG/genId.svg";
-import { ReactComponent as OneOne } from "../asset/SVG/one-one.svg";
-import { ReactComponent as GroupConf } from "../asset/SVG/groupConf.svg";
-import { ReactComponent as Dark } from "../asset/SVG/dark.svg";
-import { ReactComponent as Light } from "../asset/SVG/light.svg";
+import { ReactComponent as IdGen } from "../asset/icons/genId.svg";
+import { ReactComponent as OneOne } from "../asset/icons/one-one.svg";
+import { ReactComponent as GroupConf } from "../asset/icons/groupConf.svg";
+import { ReactComponent as Dark } from "../asset/icons/dark.svg";
+import { ReactComponent as Light } from "../asset/icons/light.svg";
 
 const Topbar = ({ darkMode, setDarkMode }) => {
     return (

@@ -21,10 +21,10 @@ const darkTheme = createMuiTheme({
 });
 
 const App = () => {
-    const [darkMode, setDarkMode] = useState(true);
+    const [darkMode, setDarkMode] = useState(false);
 
     return (
-        <ThemeProvider theme={darkMode ? lightTheme : darkTheme}>
+        <ThemeProvider theme={darkMode ? darkTheme : lightTheme}>
             <CssBaseline />
             <Home darkMode={darkMode} setDarkMode={setDarkMode} />
         </ThemeProvider>
