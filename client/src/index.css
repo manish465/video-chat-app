@@ -1,4 +1,4 @@
 @font-face {
     font-family: "MyFont";
-    src: local("MyFont"), url(./asset/Fonts/Proxima_Nova_Reg.ttf) format("woff");
+    src: local("MyFont"), url(./asset/Fonts/Proxima_Nova_Reg.ttf) format("ttf");
 }
