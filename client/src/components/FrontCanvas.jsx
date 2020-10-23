@@ -11,7 +11,7 @@ const useStyles = makeStyles({
     button: {
         boxShadow: "3px 3px 4px 0.5px rgba(0,0,0,0.3)",
         backgroundColor: "white",
-        padding: "5px 10px",
+        padding: "10px 10px",
         borderRadius: "10px",
         marginBottom: "20px",
     },
@@ -38,7 +38,7 @@ const FrontCanvas = () => {
                         }}
                         className={classes.button}>
                         <IdGen style={{ width: "30px", marginRight: "30px" }} />
-                        <Typography variant='h6'>Create a new ID</Typography>
+                        <Typography variant='h7'>Create a new ID</Typography>
                     </Button>
                 </Grid>
                 <Grid item>
@@ -46,7 +46,7 @@ const FrontCanvas = () => {
                         <OneOne
                             style={{ width: "30px", marginRight: "30px" }}
                         />
-                        <Typography variant='h6'>
+                        <Typography variant='h7'>
                             One-on-One video call
                         </Typography>
                     </Button>
@@ -56,7 +56,7 @@ const FrontCanvas = () => {
                         <GroupConf
                             style={{ width: "30px", marginRight: "30px" }}
                         />
-                        <Typography variant='h6'>
+                        <Typography variant='h7'>
                             Group video conference
                         </Typography>
                     </Button>
