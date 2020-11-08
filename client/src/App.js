@@ -1,6 +1,8 @@
 import React, { useState } from "react";
+import { Route } from "react-router-dom";
 
 import Home from "./pages/Home";
+import CallPage from "./pages/CallPage";
 
 import { createMuiTheme, CssBaseline, ThemeProvider } from "@material-ui/core";
 
@@ -26,7 +28,14 @@ const App = () => {
     return (
         <ThemeProvider theme={darkMode ? darkTheme : lightTheme}>
             <CssBaseline />
-            <Home darkMode={darkMode} setDarkMode={setDarkMode} />
+            <Route
+                exact
+                path='/'
+                component={() => (
+                    <Home darkMode={darkMode} setDarkMode={setDarkMode} />
+                )}
+            />
+            <Route exact path='/call' component={CallPage} />
         </ThemeProvider>
     );
 };

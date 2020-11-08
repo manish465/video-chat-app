@@ -5,4 +5,11 @@ import App from "./App";
 import "./index.css";
 import "./asset/Fonts/Proxima_Nova_Reg.ttf";
 
-ReactDOM.render(<App />, document.getElementById("root"));
+import { BrowserRouter as Router } from "react-router-dom";
+
+ReactDOM.render(
+    <Router>
+        <App />
+    </Router>,
+    document.getElementById("root"),
+);

@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 import { Grid, Button, Typography, makeStyles } from "@material-ui/core";
 
@@ -42,7 +43,10 @@ const FrontCanvas = () => {
                     </Button>
                 </Grid>
                 <Grid item>
-                    <Button className={classes.button}>
+                    <Button
+                        component={Link}
+                        to='/call'
+                        className={classes.button}>
                         <OneOne
                             style={{ width: "30px", marginRight: "30px" }}
                         />
