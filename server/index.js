@@ -1,6 +1,6 @@
 const express = require("express");
-const app = express();
 const http = require("http");
+const app = express();
 const server = http.createServer(app);
 const socket = require("socket.io");
 const io = socket(server);
@@ -16,6 +16,10 @@ io.on("connection", (socket) => {
 
     io.sockets.emit("allUsers", users);
 
+    socket.on("disconnect", () => {
+        delete users[socket.id];
+    });
+
     socket.on("callUser", (data) => {
         io.to(data.userToCall).emit("hey", {
             signal: data.signalData,
@@ -25,10 +29,6 @@ io.on("connection", (socket) => {
 
     socket.on("acceptCall", (data) => {
         io.to(data.to).emit("callAccepted", data.signal);
-    });
-
-    socket.on("disconnect", () => {
-        delete users[socket.id];
     });
 });
 
