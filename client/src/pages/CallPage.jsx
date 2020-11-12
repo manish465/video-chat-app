@@ -1,5 +1,7 @@
 import React, { useRef, useEffect, useState } from "react";
 
+import {} from "@material-ui/core";
+
 import io from "socket.io-client";
 import Peer from "simple-peer";
 
@@ -92,15 +94,16 @@ const CallPage = () => {
         peer.signal(callerSignal);
     };
 
-    let incomingCall;
-    if (receivingCall) {
-        incomingCall = (
-            <div>
-                <h1>{caller} is calling you</h1>
-                <button onClick={acceptCall}>Accept</button>
-            </div>
-        );
-    }
+    const incomingCall = (
+        <>
+            {receivingCall ? (
+                <div>
+                    <h1>{caller} is calling you</h1>
+                    <button onClick={acceptCall}>Accept</button>
+                </div>
+            ) : null}
+        </>
+    );
 
     return (
         <>
