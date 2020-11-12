@@ -1,6 +1,14 @@
 import React, { useRef, useEffect, useState } from "react";
 
-import { makeStyles } from "@material-ui/core";
+import { makeStyles, Button, Typography, ButtonGroup } from "@material-ui/core";
+
+import VideocamIcon from "@material-ui/icons/Videocam";
+import VideocamOffIcon from "@material-ui/icons/VideocamOff";
+import MicNoneIcon from "@material-ui/icons/MicNone";
+import MicOffIcon from "@material-ui/icons/MicOff";
+import CallEndIcon from "@material-ui/icons/CallEnd";
+
+import CallIcon from "@material-ui/icons/Call";
 
 import io from "socket.io-client";
 import Peer from "simple-peer";
@@ -10,14 +18,23 @@ const socket = io.connect("http://localhost:8000");
 const useStyles = makeStyles({
     userVideo: {
         position: "absolute",
-        bottom: "10px",
-        right: "10px",
+        bottom: "30px",
+        right: "30px",
         width: "250px",
         borderRadius: "20px",
     },
     partnerVideo: {
-        height: "100vh",
+        height: "100%",
         width: "100%",
+    },
+    callListButton: {
+        display: "block",
+        margin: "10px auto",
+    },
+    inCallButtonGroup: {
+        position: "absolute",
+        bottom: "10%",
+        left: "45%",
     },
 });
 
@@ -27,6 +44,11 @@ const CallPage = () => {
     const userVideo = useRef();
     const partnerVideo = useRef();
 
+    const [callOption, setCallOption] = useState(false);
+
+    const [video, setVideo] = useState(true);
+    const [audio, setAudio] = useState(true);
+
     const [yourID, setYourID] = useState("");
     const [users, setUsers] = useState({});
 
@@ -34,12 +56,13 @@ const CallPage = () => {
     const [callerSignal, setCallerSignal] = useState();
 
     const [receivingCall, setReceivingCall] = useState(false);
+    const [callAccepted, setCallAccepted] = useState(false);
 
     const [stream, setStream] = useState();
 
     useEffect(() => {
         navigator.mediaDevices
-            .getUserMedia({ video: true, audio: true })
+            .getUserMedia({ video: video, audio: audio })
             .then((stream) => {
                 if (userVideo.current) {
                     setStream(stream);
@@ -61,7 +84,7 @@ const CallPage = () => {
             setCaller(data.from);
             setCallerSignal(data.signal);
         });
-    }, []);
+    }, [audio, video]);
 
     const callPeer = (id) => {
         const peer = new Peer({
@@ -86,6 +109,7 @@ const CallPage = () => {
 
         socket.on("callAccepted", (signal) => {
             peer.signal(signal);
+            setCallAccepted(true);
         });
     };
 
@@ -106,6 +130,7 @@ const CallPage = () => {
 
         peer.signal(callerSignal);
         setReceivingCall(false);
+        setCallAccepted(true);
     };
 
     const incomingCall = (
@@ -115,19 +140,25 @@ const CallPage = () => {
         </div>
     );
 
-    const callList = Object.keys(users).map((id, key) => {
-        if (id === yourID) {
-            return null;
-        } else {
-            return (
-                <div>
-                    <button key={key} onClick={() => callPeer(id)}>
-                        Call {id}
-                    </button>
-                </div>
-            );
-        }
-    });
+    const callList = (
+        <>
+            <Typography variant='h2'>People Online:</Typography>
+            {Object.keys(users).map((id, key) =>
+                id !== yourID ? (
+                    <Button
+                        className={classes.callListButton}
+                        onMouseEnter={() => setCallOption(true)}
+                        onMouseLeave={() => setCallOption(false)}
+                        variant='contained'
+                        key={key}
+                        onClick={() => callPeer(id)}>
+                        <Typography>{id}</Typography>
+                        {callOption ? <CallIcon /> : null}
+                    </Button>
+                ) : null,
+            )}
+        </>
+    );
 
     return (
         <>
@@ -138,14 +169,35 @@ const CallPage = () => {
                 muted
                 autoPlay
             />
-            <video
-                className={classes.partnerVideo}
-                playsInline
-                ref={partnerVideo}
-                autoPlay
-            />
-            <br />
-            {receivingCall ? incomingCall : callList}
+
+            {callAccepted ? (
+                <>
+                    <video
+                        className={classes.partnerVideo}
+                        playsInline
+                        ref={partnerVideo}
+                        autoPlay
+                    />
+                    <ButtonGroup className={classes.inCallButtonGroup}>
+                        <Button onClick={() => setVideo(!video)}>
+                            {video ? <VideocamOffIcon /> : <VideocamIcon />}
+                        </Button>
+                        <Button onClick={() => setAudio(!audio)}>
+                            {audio ? <MicOffIcon /> : <MicNoneIcon />}
+                        </Button>
+                        <Button
+                            onClick={() => setCallAccepted(false)}
+                            color='secondary'
+                            variant='contained'>
+                            <CallEndIcon />
+                        </Button>
+                    </ButtonGroup>
+                </>
+            ) : (
+                callList
+            )}
+
+            {receivingCall ? incomingCall : null}
         </>
     );
 };
