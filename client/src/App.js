@@ -3,7 +3,6 @@ import { Route } from "react-router-dom";
 
 import Home from "./pages/Home";
 import CallPage from "./pages/CallPage";
-import TopBar from "./components/AppBar";
 
 import { createMuiTheme, CssBaseline, ThemeProvider } from "@material-ui/core";
 
@@ -29,7 +28,6 @@ const App = () => {
     return (
         <ThemeProvider theme={darkMode ? darkTheme : lightTheme}>
             <CssBaseline />
-            <TopBar darkMode={darkMode} setDarkMode={setDarkMode} />
             <Route
                 exact
                 path='/'

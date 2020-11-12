@@ -16,8 +16,8 @@ const useStyles = makeStyles({
         borderRadius: "20px",
     },
     partnerVideo: {
-        height: "100%",
-        width: "60%",
+        height: "100vh",
+        width: "100%",
     },
 });
 
