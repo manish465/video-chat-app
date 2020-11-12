@@ -39,7 +39,7 @@ const FrontCanvas = () => {
                         }}
                         className={classes.button}>
                         <IdGen style={{ width: "30px", marginRight: "30px" }} />
-                        <Typography variant='h7'>Create a new ID</Typography>
+                        <Typography variant='h6'>Create a new ID</Typography>
                     </Button>
                 </Grid>
                 <Grid item>
