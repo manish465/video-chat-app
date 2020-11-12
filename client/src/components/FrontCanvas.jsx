@@ -39,7 +39,7 @@ const FrontCanvas = () => {
                         }}
                         className={classes.button}>
                         <IdGen style={{ width: "30px", marginRight: "30px" }} />
-                        <Typography variant='h6'>Create a new ID</Typography>
+                        <Typography variant='h4'>Create a new ID</Typography>
                     </Button>
                 </Grid>
                 <Grid item>
@@ -50,7 +50,7 @@ const FrontCanvas = () => {
                         <OneOne
                             style={{ width: "30px", marginRight: "30px" }}
                         />
-                        <Typography variant='h7'>
+                        <Typography variant='h6'>
                             One-on-One video call
                         </Typography>
                     </Button>
@@ -60,7 +60,7 @@ const FrontCanvas = () => {
                         <GroupConf
                             style={{ width: "30px", marginRight: "30px" }}
                         />
-                        <Typography variant='h7'>
+                        <Typography variant='h6'>
                             Group video conference
                         </Typography>
                     </Button>
