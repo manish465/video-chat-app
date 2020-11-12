@@ -8,7 +8,8 @@ const CallPage = () => {
     const userVideo = useRef();
     const partnerVideo = useRef();
 
-    const [yourId, setYourId] = useState("");
+    const [yourID, setYourID] = useState("");
+    const [users, setUsers] = useState({});
 
     useEffect(() => {
         navigator.mediaDevices
@@ -18,15 +19,20 @@ const CallPage = () => {
             })
             .catch((e) => console.log(e));
 
-        socket.on("hello", (id) => {
-            setYourId(id);
+        socket.on("yourID", (id) => {
+            setYourID(id);
         });
-    }, []);
+
+        socket.on("allUsers", (users) => {
+            setUsers(users);
+        });
+    });
 
     return (
         <>
             <video playsInline ref={userVideo} muted autoPlay />
             <video playsInline ref={partnerVideo} autoPlay />
+            {yourID}
         </>
     );
 };
