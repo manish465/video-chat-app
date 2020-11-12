@@ -10,7 +10,8 @@ const lightTheme = createMuiTheme({
     palette: {
         background: { default: "#EBEDF9" },
         primary: { main: "#67D0E8" },
-        text: { main: "#707070" },
+        secondary: { main: "#ff0000" },
+        text: { main: "#e63939" },
     },
 });
 

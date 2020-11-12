@@ -1,6 +1,12 @@
 import React, { useRef, useEffect, useState } from "react";
 
-import { makeStyles, Button, Typography, ButtonGroup } from "@material-ui/core";
+import {
+    makeStyles,
+    Button,
+    Typography,
+    ButtonGroup,
+    Paper,
+} from "@material-ui/core";
 
 import VideocamIcon from "@material-ui/icons/Videocam";
 import VideocamOffIcon from "@material-ui/icons/VideocamOff";
@@ -35,6 +41,10 @@ const useStyles = makeStyles({
         position: "absolute",
         bottom: "10%",
         left: "45%",
+    },
+    incomingCall: {
+        margin: "40px",
+        padding: "20px",
     },
 });
 
@@ -134,10 +144,23 @@ const CallPage = () => {
     };
 
     const incomingCall = (
-        <div>
-            <h1>{caller} is calling you</h1>
-            <button onClick={acceptCall}>Accept</button>
-        </div>
+        <Paper elevation={3} className={classes.incomingCall}>
+            <Typography variant='h4'>{caller} is calling you</Typography>
+            <ButtonGroup style={{ width: "20%" }}>
+                <Button
+                    variant='contained'
+                    color='primary'
+                    onClick={acceptCall}>
+                    <CallIcon />
+                </Button>
+                <Button
+                    variant='contained'
+                    color='secondary'
+                    onClick={acceptCall}>
+                    <CallEndIcon />
+                </Button>
+            </ButtonGroup>
+        </Paper>
     );
 
     const callList = (
@@ -153,7 +176,7 @@ const CallPage = () => {
                         key={key}
                         onClick={() => callPeer(id)}>
                         <Typography>{id}</Typography>
-                        {callOption ? <CallIcon /> : null}
+                        {callOption ? <CallIcon /> : <CallEndIcon />}
                     </Button>
                 ) : null,
             )}
