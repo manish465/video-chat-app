@@ -9,9 +9,9 @@ io.on("connection", (socket) => {
         users[socket.id] = socket.id;
     }
 
-    socket.emit("yourID", socket.id);
-
     io.sockets.emit("allUsers", users);
+
+    socket.emit("yourID", socket.id);
 
     socket.on("callUser", (data) => {
         io.to(data.userToCall).emit("hey", {

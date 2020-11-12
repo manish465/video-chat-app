@@ -30,8 +30,9 @@ const useStyles = makeStyles({
         borderRadius: "20px",
     },
     partnerVideo: {
-        height: "100%",
         width: "100%",
+        height: "99vh",
+        background: "#000",
     },
     callListButton: {
         display: "block",
@@ -80,21 +81,21 @@ const CallPage = () => {
                 }
             })
             .catch((e) => console.log(e));
-
-        socket.on("yourID", (id) => {
-            setYourID(id);
-        });
-
-        socket.on("allUsers", (users) => {
-            setUsers(users);
-        });
-
-        socket.on("hey", (data) => {
-            setReceivingCall(true);
-            setCaller(data.from);
-            setCallerSignal(data.signal);
-        });
     }, [audio, video]);
+
+    socket.on("yourID", (id) => {
+        setYourID(id);
+    });
+
+    socket.on("allUsers", (users) => {
+        setUsers(users);
+    });
+
+    socket.on("hey", (data) => {
+        setReceivingCall(true);
+        setCaller(data.from);
+        setCallerSignal(data.signal);
+    });
 
     const callPeer = (id) => {
         const peer = new Peer({
@@ -156,7 +157,7 @@ const CallPage = () => {
                 <Button
                     variant='contained'
                     color='secondary'
-                    onClick={acceptCall}>
+                    onClick={() => setReceivingCall(false)}>
                     <CallEndIcon />
                 </Button>
             </ButtonGroup>
@@ -194,31 +195,30 @@ const CallPage = () => {
             />
 
             {callAccepted ? (
-                <>
-                    <video
-                        className={classes.partnerVideo}
-                        playsInline
-                        ref={partnerVideo}
-                        autoPlay
-                    />
-                    <ButtonGroup className={classes.inCallButtonGroup}>
-                        <Button onClick={() => setVideo(!video)}>
-                            {video ? <VideocamOffIcon /> : <VideocamIcon />}
-                        </Button>
-                        <Button onClick={() => setAudio(!audio)}>
-                            {audio ? <MicOffIcon /> : <MicNoneIcon />}
-                        </Button>
-                        <Button
-                            onClick={() => setCallAccepted(false)}
-                            color='secondary'
-                            variant='contained'>
-                            <CallEndIcon />
-                        </Button>
-                    </ButtonGroup>
-                </>
+                <video
+                    className={classes.partnerVideo}
+                    playsInline
+                    ref={partnerVideo}
+                    autoPlay
+                />
             ) : (
                 callList
             )}
+            <ButtonGroup className={classes.inCallButtonGroup}>
+                <Button onClick={() => setVideo(!video)}>
+                    {video ? <VideocamOffIcon /> : <VideocamIcon />}
+                </Button>
+                <Button onClick={() => setAudio(!audio)}>
+                    {audio ? <MicOffIcon /> : <MicNoneIcon />}
+                </Button>
+                <Button
+                    onClick={() => setCallAccepted(false)}
+                    disabled={!callAccepted}
+                    color='secondary'
+                    variant='contained'>
+                    <CallEndIcon />
+                </Button>
+            </ButtonGroup>
 
             {receivingCall ? incomingCall : null}
         </>

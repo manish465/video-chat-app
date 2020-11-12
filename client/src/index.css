@@ -2,3 +2,7 @@
     font-family: "MyFont";
     src: local("MyFont"), url(./asset/Fonts/Proxima_Nova_Reg.ttf) format("ttf");
 }
+
+body {
+    box-sizing: border-box;
+}
