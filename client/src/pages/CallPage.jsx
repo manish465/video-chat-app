@@ -1,13 +1,29 @@
 import React, { useRef, useEffect, useState } from "react";
 
-import {} from "@material-ui/core";
+import { makeStyles } from "@material-ui/core";
 
 import io from "socket.io-client";
 import Peer from "simple-peer";
 
 const socket = io.connect("http://localhost:8000");
 
+const useStyles = makeStyles({
+    userVideo: {
+        position: "absolute",
+        bottom: "10px",
+        right: "10px",
+        width: "250px",
+        borderRadius: "20px",
+    },
+    partnerVideo: {
+        height: "100%",
+        width: "60%",
+    },
+});
+
 const CallPage = () => {
+    const classes = useStyles();
+
     const userVideo = useRef();
     const partnerVideo = useRef();
 
@@ -18,7 +34,6 @@ const CallPage = () => {
     const [callerSignal, setCallerSignal] = useState();
 
     const [receivingCall, setReceivingCall] = useState(false);
-    const [callAccepted, setCallAccepted] = useState(false);
 
     const [stream, setStream] = useState();
 
@@ -70,13 +85,11 @@ const CallPage = () => {
         });
 
         socket.on("callAccepted", (signal) => {
-            setCallAccepted(true);
             peer.signal(signal);
         });
     };
 
     const acceptCall = () => {
-        setCallAccepted(true);
         const peer = new Peer({
             initiator: false,
             trickle: false,
@@ -92,36 +105,47 @@ const CallPage = () => {
         });
 
         peer.signal(callerSignal);
+        setReceivingCall(false);
     };
 
     const incomingCall = (
-        <>
-            {receivingCall ? (
-                <div>
-                    <h1>{caller} is calling you</h1>
-                    <button onClick={acceptCall}>Accept</button>
-                </div>
-            ) : null}
-        </>
+        <div>
+            <h1>{caller} is calling you</h1>
+            <button onClick={acceptCall}>Accept</button>
+        </div>
     );
+
+    const callList = Object.keys(users).map((id, key) => {
+        if (id === yourID) {
+            return null;
+        } else {
+            return (
+                <div>
+                    <button key={key} onClick={() => callPeer(id)}>
+                        Call {id}
+                    </button>
+                </div>
+            );
+        }
+    });
 
     return (
         <>
-            <video playsInline ref={userVideo} muted autoPlay />
-            <video playsInline ref={partnerVideo} autoPlay />
+            <video
+                className={classes.userVideo}
+                playsInline
+                ref={userVideo}
+                muted
+                autoPlay
+            />
+            <video
+                className={classes.partnerVideo}
+                playsInline
+                ref={partnerVideo}
+                autoPlay
+            />
             <br />
-            {Object.keys(users).map((id, key) => {
-                if (id === yourID) {
-                    return null;
-                } else {
-                    return (
-                        <button key={key} onClick={() => callPeer(id)}>
-                            Call {id}
-                        </button>
-                    );
-                }
-            })}
-            {incomingCall}
+            {receivingCall ? incomingCall : callList}
         </>
     );
 };
