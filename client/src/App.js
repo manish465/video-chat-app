@@ -26,6 +26,7 @@ const darkTheme = createMuiTheme({
 
 const App = () => {
     const [darkMode, setDarkMode] = useState(false);
+    const [userName, setUserName] = useState("");
 
     return (
         <ThemeProvider theme={darkMode ? darkTheme : lightTheme}>
@@ -34,10 +35,18 @@ const App = () => {
                 exact
                 path='/'
                 component={() => (
-                    <Home darkMode={darkMode} setDarkMode={setDarkMode} />
+                    <Home
+                        userName={userName}
+                        darkMode={darkMode}
+                        setDarkMode={setDarkMode}
+                    />
                 )}
             />
-            <Route exact path='/gen-id' component={GenId} />
+            <Route
+                exact
+                path='/gen-id'
+                component={() => <GenId setUserName={setUserName} />}
+            />
             <Route exact path='/call' component={CallPage} />
         </ThemeProvider>
     );

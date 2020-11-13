@@ -14,7 +14,7 @@ import { ReactComponent as GroupConf } from "../asset/icons/groupConf.svg";
 import { ReactComponent as Dark } from "../asset/icons/dark.svg";
 import { ReactComponent as Light } from "../asset/icons/light.svg";
 
-const Topbar = ({ darkMode, setDarkMode }) => {
+const Topbar = ({ userName, darkMode, setDarkMode }) => {
     return (
         <>
             <AppBar position='static'>
@@ -26,7 +26,7 @@ const Topbar = ({ darkMode, setDarkMode }) => {
                         alignItems='center'>
                         <Grid item>
                             <Typography variant='subtitle1'>
-                                convo 5:45PM Wed, Oct 21
+                                {userName ? `Hello ${userName}` : null}
                             </Typography>
                         </Grid>
                         <Grid item>
