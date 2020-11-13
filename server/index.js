@@ -2,6 +2,8 @@ const app = require("express")();
 const http = require("http").createServer(app);
 const io = require("socket.io")(http);
 
+const port = process.env.PORT || 8000;
+
 const users = {};
 
 io.on("connection", (socket) => {
@@ -30,6 +32,6 @@ io.on("connection", (socket) => {
     });
 });
 
-http.listen(8000, () => {
-    console.log("server is running");
+http.listen(port, () => {
+    console.log(`server is running ${port}`);
 });

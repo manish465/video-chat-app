@@ -33,6 +33,8 @@ const FrontCanvas = () => {
             <Grid>
                 <Grid item>
                     <Button
+                        component={Link}
+                        to='/gen-id'
                         style={{
                             background:
                                 "linear-gradient(to right, #6dd5ed, #2193b0)",

@@ -3,6 +3,7 @@ import { Route } from "react-router-dom";
 
 import Home from "./pages/Home";
 import CallPage from "./pages/CallPage";
+import GenId from "./pages/GenId";
 
 import { createMuiTheme, CssBaseline, ThemeProvider } from "@material-ui/core";
 
@@ -36,6 +37,7 @@ const App = () => {
                     <Home darkMode={darkMode} setDarkMode={setDarkMode} />
                 )}
             />
+            <Route exact path='/gen-id' component={GenId} />
             <Route exact path='/call' component={CallPage} />
         </ThemeProvider>
     );
