@@ -5,27 +5,12 @@ import Home from "./pages/Home";
 import CallPage from "./pages/CallPage";
 import GenId from "./pages/GenId";
 
-import { createMuiTheme, CssBaseline, ThemeProvider } from "@material-ui/core";
+import themes from "./styles/theme";
+
+import { CssBaseline, ThemeProvider } from "@material-ui/core";
 
 const PATH = "video-chat-app";
 const USERNAMEPATH = "name";
-
-const lightTheme = createMuiTheme({
-    palette: {
-        background: { default: "#EBEDF9" },
-        primary: { main: "#67D0E8" },
-        secondary: { main: "#ff0000" },
-        text: { main: "#e63939" },
-    },
-});
-
-const darkTheme = createMuiTheme({
-    palette: {
-        background: { default: "#424451" },
-        primary: { main: "#67D0E8" },
-        text: { main: "#707070" },
-    },
-});
 
 const App = () => {
     const [darkMode, setDarkMode] = useState(false);
@@ -41,7 +26,7 @@ const App = () => {
     }, [userName]);
 
     return (
-        <ThemeProvider theme={darkMode ? darkTheme : lightTheme}>
+        <ThemeProvider theme={darkMode ? themes.darkTheme : themes.lightTheme}>
             <CssBaseline />
             <Route
                 exact
