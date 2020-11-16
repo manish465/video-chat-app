@@ -143,7 +143,7 @@ const CallPage = () => {
                 callAccepted={callAccepted}
                 setCallAccepted={setCallAccepted}
             />
-            {receivingCall ? (
+            {receivingCall && callAccepted === false ? (
                 <IncomingCall
                     caller={caller}
                     acceptCall={acceptCall}
