@@ -15,13 +15,12 @@ import CallIcon from "@material-ui/icons/Call";
 import io from "socket.io-client";
 import Peer from "simple-peer";
 
-const socket = io.connect("http://localhost:8000");
-
 const CallPage = () => {
     const classes = useStyles();
 
     const userVideo = useRef();
     const partnerVideo = useRef();
+    const socket = useRef();
 
     const [callOption, setCallOption] = useState(false);
 
@@ -49,21 +48,23 @@ const CallPage = () => {
                 }
             })
             .catch((e) => console.log(e));
+
+        socket.current = io.connect("http://localhost:8000");
+
+        socket.current.on("yourID", (id) => {
+            setYourID(id);
+        });
+
+        socket.current.on("allUsers", (users) => {
+            setUsers(users);
+        });
+
+        socket.current.on("hey", (data) => {
+            setReceivingCall(true);
+            setCaller(data.from);
+            setCallerSignal(data.signal);
+        });
     }, [audio, video]);
-
-    socket.on("yourID", (id) => {
-        setYourID(id);
-    });
-
-    socket.on("allUsers", (users) => {
-        setUsers(users);
-    });
-
-    socket.on("hey", (data) => {
-        setReceivingCall(true);
-        setCaller(data.from);
-        setCallerSignal(data.signal);
-    });
 
     const callPeer = (id) => {
         const peer = new Peer({
@@ -73,7 +74,7 @@ const CallPage = () => {
         });
 
         peer.on("signal", (data) => {
-            socket.emit("callUser", {
+            socket.current.emit("callUser", {
                 userToCall: id,
                 signalData: data,
                 from: yourID,
@@ -86,7 +87,7 @@ const CallPage = () => {
             }
         });
 
-        socket.on("callAccepted", (signal) => {
+        socket.current.on("callAccepted", (signal) => {
             peer.signal(signal);
             setCallAccepted(true);
         });
@@ -100,7 +101,7 @@ const CallPage = () => {
         });
 
         peer.on("signal", (data) => {
-            socket.emit("acceptCall", { signal: data, to: caller });
+            socket.current.emit("acceptCall", { signal: data, to: caller });
         });
 
         peer.on("stream", (stream) => {
