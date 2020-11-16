@@ -1,25 +1,12 @@
 import React, { useState } from "react";
 
-import { Paper, makeStyles, TextField, Button } from "@material-ui/core";
+import { Paper, TextField, Button } from "@material-ui/core";
 
 import SaveIcon from "@material-ui/icons/Save";
 
 import { Link } from "react-router-dom";
 
-const useStyles = makeStyles({
-    paper: {
-        margin: "10% 25%",
-        height: "30vh",
-    },
-    text: {
-        marginTop: "65px",
-        marginLeft: "170px",
-    },
-    button: {
-        marginTop: "70px",
-        marginLeft: "20px",
-    },
-});
+import useStyles from "../styles/style";
 
 const GenId = ({ setUserName }) => {
     const classes = useStyles();
@@ -42,7 +29,7 @@ const GenId = ({ setUserName }) => {
                 to='/'
                 size='large'
                 variant='contained'
-                className={classes.button}>
+                className={classes.buttonGen}>
                 <SaveIcon />
             </Button>
         </Paper>

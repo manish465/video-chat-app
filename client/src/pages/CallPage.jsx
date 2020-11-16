@@ -1,12 +1,8 @@
 import React, { useRef, useEffect, useState } from "react";
 
-import {
-    makeStyles,
-    Button,
-    Typography,
-    ButtonGroup,
-    Paper,
-} from "@material-ui/core";
+import { Button, Typography, ButtonGroup, Paper } from "@material-ui/core";
+
+import useStyles from "../styles/style";
 
 import VideocamIcon from "@material-ui/icons/Videocam";
 import VideocamOffIcon from "@material-ui/icons/VideocamOff";
@@ -20,34 +16,6 @@ import io from "socket.io-client";
 import Peer from "simple-peer";
 
 const socket = io.connect("http://localhost:8000");
-
-const useStyles = makeStyles({
-    userVideo: {
-        position: "absolute",
-        bottom: "30px",
-        right: "30px",
-        width: "250px",
-        borderRadius: "20px",
-    },
-    partnerVideo: {
-        width: "100%",
-        height: "99vh",
-        background: "#000",
-    },
-    callListButton: {
-        display: "block",
-        margin: "10px auto",
-    },
-    inCallButtonGroup: {
-        position: "absolute",
-        bottom: "10%",
-        left: "45%",
-    },
-    incomingCall: {
-        margin: "40px",
-        padding: "20px",
-    },
-});
 
 const CallPage = () => {
     const classes = useStyles();

@@ -1,22 +1,14 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-import { Grid, Button, Typography, makeStyles } from "@material-ui/core";
+import { Grid, Button, Typography } from "@material-ui/core";
+
+import useStyles from "../styles/style";
 
 import { ReactComponent as FrontBanner } from "../asset/Banner/frontPage.svg";
 import { ReactComponent as IdGen } from "../asset/icons/genId.svg";
 import { ReactComponent as OneOne } from "../asset/icons/one-one.svg";
 import { ReactComponent as GroupConf } from "../asset/icons/groupConf.svg";
-
-const useStyles = makeStyles({
-    button: {
-        boxShadow: "3px 3px 4px 0.5px rgba(0,0,0,0.3)",
-        backgroundColor: "white",
-        padding: "10px 10px",
-        borderRadius: "10px",
-        marginBottom: "20px",
-    },
-});
 
 const FrontCanvas = ({ userName }) => {
     const classes = useStyles();
