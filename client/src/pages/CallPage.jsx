@@ -7,6 +7,8 @@ import { ControlPanal, CallList, IncomingCall } from "../components";
 
 import useStyles from "../styles/style";
 
+const PATH = "http://localhost:8000";
+
 const CallPage = () => {
     const classes = useStyles();
 
@@ -49,6 +51,7 @@ const CallPage = () => {
                 .then((stream) => {
                     if (userVideo.current) {
                         setStream(stream);
+                        console.log(stream);
                         userVideo.current.srcObject = stream;
                     }
                 })
@@ -57,7 +60,7 @@ const CallPage = () => {
     }, [audio, video, present]);
 
     useEffect(() => {
-        socket.current = io.connect("http://localhost:8000");
+        socket.current = io.connect(PATH);
 
         socket.current.on("yourID", (id) => {
             setYourID(id);
@@ -71,6 +74,11 @@ const CallPage = () => {
             setReceivingCall(true);
             setCaller(data.from);
             setCallerSignal(data.signal);
+        });
+
+        socket.current.on("user left", () => {
+            setCaller("");
+            setCallAccepted(false);
         });
     }, []);
 
@@ -92,6 +100,7 @@ const CallPage = () => {
         peer.on("stream", (stream) => {
             if (partnerVideo.current) {
                 partnerVideo.current.srcObject = stream;
+                console.log(caller);
             }
         });
 

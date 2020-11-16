@@ -27,8 +27,14 @@ io.on("connection", (socket) => {
         io.to(data.to).emit("callAccepted", data.signal);
     });
 
+    socket.on("user disconnect", () => {
+        socket.broadcast.emit("user disconnect");
+        io.sockets.emit("allUsers", users);
+    });
+
     socket.on("disconnect", () => {
         console.log(`user ${socket.id} left`);
+        socket.broadcast.emit("user left");
         delete users[socket.id];
         io.sockets.emit("allUsers", users);
     });
