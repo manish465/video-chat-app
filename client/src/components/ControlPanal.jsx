@@ -1,5 +1,7 @@
 import React from "react";
 
+import { Link } from "react-router-dom";
+
 import { ButtonGroup, Button } from "@material-ui/core";
 
 import VideocamIcon from "@material-ui/icons/Videocam";
@@ -21,6 +23,7 @@ const ControlPanal = ({
     setCallAccepted,
     present,
     setPresent,
+    socket,
 }) => {
     const classes = useStyles();
 
@@ -36,7 +39,12 @@ const ControlPanal = ({
                 {present ? <PausePresentationIcon /> : <PresentToAllIcon />}
             </Button>
             <Button
-                onClick={() => setCallAccepted(false)}
+                component={Link}
+                to='/'
+                onClick={() => {
+                    socket.current.disconnect();
+                    setCallAccepted(false);
+                }}
                 disabled={!callAccepted}
                 color='secondary'
                 variant='contained'>

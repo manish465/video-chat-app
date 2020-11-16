@@ -165,6 +165,7 @@ const CallPage = () => {
                 setCallAccepted={setCallAccepted}
                 present={present}
                 setPresent={setPresent}
+                socket={socket}
             />
             {receivingCall && callAccepted === false ? (
                 <IncomingCall
