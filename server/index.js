@@ -7,6 +7,7 @@ const port = process.env.PORT || 8000;
 const users = {};
 
 io.on("connection", (socket) => {
+    console.log(`user ${socket.id} joined`);
     if (!users[socket.id]) {
         users[socket.id] = socket.id;
     }
@@ -27,6 +28,7 @@ io.on("connection", (socket) => {
     });
 
     socket.on("disconnect", () => {
+        console.log(`user ${socket.id} left`);
         delete users[socket.id];
         io.sockets.emit("allUsers", users);
     });
