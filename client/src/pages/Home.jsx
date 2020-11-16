@@ -1,12 +1,11 @@
 import React from "react";
 
-import FrontCanvas from "./../components/FrontCanvas";
-import TopBar from "../components/AppBar";
+import { FrontCanvas, Appbar } from "./../components";
 
 const Home = ({ userName, darkMode, setDarkMode }) => {
     return (
         <>
-            <TopBar
+            <Appbar
                 userName={userName}
                 darkMode={darkMode}
                 setDarkMode={setDarkMode}

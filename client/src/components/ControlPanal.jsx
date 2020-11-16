@@ -25,26 +25,24 @@ const ControlPanal = ({
     const classes = useStyles();
 
     return (
-        <>
-            <ButtonGroup className={classes.inCallButtonGroup}>
-                <Button onClick={() => setVideo(!video)}>
-                    {video ? <VideocamOffIcon /> : <VideocamIcon />}
-                </Button>
-                <Button onClick={() => setAudio(!audio)}>
-                    {audio ? <MicOffIcon /> : <MicNoneIcon />}
-                </Button>
-                <Button onClick={() => setPresent(!present)}>
-                    {present ? <PausePresentationIcon /> : <PresentToAllIcon />}
-                </Button>
-                <Button
-                    onClick={() => setCallAccepted(false)}
-                    disabled={!callAccepted}
-                    color='secondary'
-                    variant='contained'>
-                    <CallEndIcon />
-                </Button>
-            </ButtonGroup>
-        </>
+        <ButtonGroup className={classes.inCallButtonGroup}>
+            <Button onClick={() => setVideo(!video)}>
+                {video ? <VideocamOffIcon /> : <VideocamIcon />}
+            </Button>
+            <Button onClick={() => setAudio(!audio)}>
+                {audio ? <MicOffIcon /> : <MicNoneIcon />}
+            </Button>
+            <Button onClick={() => setPresent(!present)}>
+                {present ? <PausePresentationIcon /> : <PresentToAllIcon />}
+            </Button>
+            <Button
+                onClick={() => setCallAccepted(false)}
+                disabled={!callAccepted}
+                color='secondary'
+                variant='contained'>
+                <CallEndIcon />
+            </Button>
+        </ButtonGroup>
     );
 };
 

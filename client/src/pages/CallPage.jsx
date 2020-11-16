@@ -3,9 +3,7 @@ import React, { useRef, useEffect, useState } from "react";
 import io from "socket.io-client";
 import Peer from "simple-peer";
 
-import ControlPanal from "../components/ControlPanal";
-import CallList from "../components/CallList";
-import IncomingCall from "../components/IncomingCall";
+import { ControlPanal, CallList, IncomingCall } from "../components";
 
 import useStyles from "../styles/style";
 

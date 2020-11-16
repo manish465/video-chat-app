@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Route } from "react-router-dom";
 
-import Home from "./pages/Home";
-import CallPage from "./pages/CallPage";
-import GenId from "./pages/GenId";
+import { Home, CallPage, GenId } from "./pages";
 
 import themes from "./styles/theme";
 
