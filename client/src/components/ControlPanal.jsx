@@ -7,6 +7,8 @@ import VideocamOffIcon from "@material-ui/icons/VideocamOff";
 import MicNoneIcon from "@material-ui/icons/MicNone";
 import MicOffIcon from "@material-ui/icons/MicOff";
 import CallEndIcon from "@material-ui/icons/CallEnd";
+import PresentToAllIcon from "@material-ui/icons/PresentToAll";
+import PausePresentationIcon from "@material-ui/icons/PausePresentation";
 
 import useStyles from "../styles/style";
 
@@ -17,6 +19,8 @@ const ControlPanal = ({
     setAudio,
     callAccepted,
     setCallAccepted,
+    present,
+    setPresent,
 }) => {
     const classes = useStyles();
 
@@ -28,6 +32,9 @@ const ControlPanal = ({
                 </Button>
                 <Button onClick={() => setAudio(!audio)}>
                     {audio ? <MicOffIcon /> : <MicNoneIcon />}
+                </Button>
+                <Button onClick={() => setPresent(!present)}>
+                    {present ? <PausePresentationIcon /> : <PresentToAllIcon />}
                 </Button>
                 <Button
                     onClick={() => setCallAccepted(false)}

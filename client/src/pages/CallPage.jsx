@@ -18,6 +18,8 @@ const CallPage = () => {
 
     const [callOption, setCallOption] = useState(false);
 
+    const [present, setPresent] = useState(false);
+
     const [video, setVideo] = useState(true);
     const [audio, setAudio] = useState(true);
 
@@ -33,16 +35,28 @@ const CallPage = () => {
     const [stream, setStream] = useState();
 
     useEffect(() => {
-        navigator.mediaDevices
-            .getUserMedia({ video: video, audio: audio })
-            .then((stream) => {
-                if (userVideo.current) {
-                    setStream(stream);
-                    userVideo.current.srcObject = stream;
-                }
-            })
-            .catch((e) => console.log(e));
-    }, [audio, video]);
+        if (present) {
+            navigator.mediaDevices
+                .getDisplayMedia({ video: video, audio: audio })
+                .then((stream) => {
+                    if (userVideo.current) {
+                        setStream(stream);
+                        userVideo.current.srcObject = stream;
+                    }
+                })
+                .catch((e) => console.log(e));
+        } else {
+            navigator.mediaDevices
+                .getUserMedia({ video: video, audio: audio })
+                .then((stream) => {
+                    if (userVideo.current) {
+                        setStream(stream);
+                        userVideo.current.srcObject = stream;
+                    }
+                })
+                .catch((e) => console.log(e));
+        }
+    }, [audio, video, present]);
 
     useEffect(() => {
         socket.current = io.connect("http://localhost:8000");
@@ -142,6 +156,8 @@ const CallPage = () => {
                 setAudio={setAudio}
                 callAccepted={callAccepted}
                 setCallAccepted={setCallAccepted}
+                present={present}
+                setPresent={setPresent}
             />
             {receivingCall && callAccepted === false ? (
                 <IncomingCall
