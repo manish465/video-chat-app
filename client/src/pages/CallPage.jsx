@@ -1,19 +1,13 @@
 import React, { useRef, useEffect, useState } from "react";
 
-import { Button, Typography, ButtonGroup, Paper } from "@material-ui/core";
-
-import useStyles from "../styles/style";
-
-import VideocamIcon from "@material-ui/icons/Videocam";
-import VideocamOffIcon from "@material-ui/icons/VideocamOff";
-import MicNoneIcon from "@material-ui/icons/MicNone";
-import MicOffIcon from "@material-ui/icons/MicOff";
-import CallEndIcon from "@material-ui/icons/CallEnd";
-
-import CallIcon from "@material-ui/icons/Call";
-
 import io from "socket.io-client";
 import Peer from "simple-peer";
+
+import ControlPanal from "../components/ControlPanal";
+import CallList from "../components/CallList";
+import IncomingCall from "../components/IncomingCall";
+
+import useStyles from "../styles/style";
 
 const CallPage = () => {
     const classes = useStyles();
@@ -48,7 +42,9 @@ const CallPage = () => {
                 }
             })
             .catch((e) => console.log(e));
+    }, [audio, video]);
 
+    useEffect(() => {
         socket.current = io.connect("http://localhost:8000");
 
         socket.current.on("yourID", (id) => {
@@ -64,7 +60,7 @@ const CallPage = () => {
             setCaller(data.from);
             setCallerSignal(data.signal);
         });
-    }, [audio, video]);
+    }, []);
 
     const callPeer = (id) => {
         const peer = new Peer({
@@ -113,66 +109,6 @@ const CallPage = () => {
         setCallAccepted(true);
     };
 
-    const incomingCall = (
-        <Paper elevation={3} className={classes.incomingCall}>
-            <Typography variant='h4'>{caller} is calling you</Typography>
-            <ButtonGroup style={{ width: "20%" }}>
-                <Button
-                    variant='contained'
-                    color='primary'
-                    onClick={acceptCall}>
-                    <CallIcon />
-                </Button>
-                <Button
-                    variant='contained'
-                    color='secondary'
-                    onClick={() => setReceivingCall(false)}>
-                    <CallEndIcon />
-                </Button>
-            </ButtonGroup>
-        </Paper>
-    );
-
-    const callList = (
-        <>
-            <Typography variant='h2'>People Online:</Typography>
-            {Object.keys(users).map((id, key) =>
-                id !== yourID ? (
-                    <Button
-                        className={classes.callListButton}
-                        onMouseEnter={() => setCallOption(true)}
-                        onMouseLeave={() => setCallOption(false)}
-                        variant='contained'
-                        key={key}
-                        onClick={() => callPeer(id)}>
-                        <Typography>{id}</Typography>
-                        {callOption ? <CallIcon /> : <CallEndIcon />}
-                    </Button>
-                ) : null,
-            )}
-        </>
-    );
-
-    const controlPanal = (
-        <>
-            <ButtonGroup className={classes.inCallButtonGroup}>
-                <Button onClick={() => setVideo(!video)}>
-                    {video ? <VideocamOffIcon /> : <VideocamIcon />}
-                </Button>
-                <Button onClick={() => setAudio(!audio)}>
-                    {audio ? <MicOffIcon /> : <MicNoneIcon />}
-                </Button>
-                <Button
-                    onClick={() => setCallAccepted(false)}
-                    disabled={!callAccepted}
-                    color='secondary'
-                    variant='contained'>
-                    <CallEndIcon />
-                </Button>
-            </ButtonGroup>
-        </>
-    );
-
     return (
         <>
             <video
@@ -191,10 +127,29 @@ const CallPage = () => {
                     autoPlay
                 />
             ) : (
-                callList
+                <CallList
+                    users={users}
+                    yourID={yourID}
+                    callPeer={callPeer}
+                    setCallOption={setCallOption}
+                    callOption={callOption}
+                />
             )}
-            {controlPanal}
-            {receivingCall ? incomingCall : null}
+            <ControlPanal
+                video={video}
+                setVideo={setVideo}
+                audio={audio}
+                setAudio={setAudio}
+                callAccepted={callAccepted}
+                setCallAccepted={setCallAccepted}
+            />
+            {receivingCall ? (
+                <IncomingCall
+                    caller={caller}
+                    acceptCall={acceptCall}
+                    setReceivingCall={setReceivingCall}
+                />
+            ) : null}
         </>
     );
 };
