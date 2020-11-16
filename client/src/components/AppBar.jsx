@@ -26,7 +26,7 @@ const Topbar = ({ userName, darkMode, setDarkMode }) => {
                         alignItems='center'>
                         <Grid item>
                             <Typography variant='subtitle1'>
-                                {userName ? `Hello ${userName}` : null}
+                                {userName !== "" ? `Hello ${userName}` : null}
                             </Typography>
                         </Grid>
                         <Grid item>

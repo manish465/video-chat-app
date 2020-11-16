@@ -23,7 +23,7 @@ const useStyles = makeStyles({
 
 const GenId = ({ setUserName }) => {
     const classes = useStyles();
-    const [text, setText] = useState(null);
+    const [text, setText] = useState("");
 
     return (
         <Paper className={classes.paper} variant='outlined'>
