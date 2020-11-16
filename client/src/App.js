@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Route } from "react-router-dom";
 
 import Home from "./pages/Home";
@@ -6,6 +6,9 @@ import CallPage from "./pages/CallPage";
 import GenId from "./pages/GenId";
 
 import { createMuiTheme, CssBaseline, ThemeProvider } from "@material-ui/core";
+
+const PATH = "video-chat-app";
+const USERNAMEPATH = "name";
 
 const lightTheme = createMuiTheme({
     palette: {
@@ -27,6 +30,15 @@ const darkTheme = createMuiTheme({
 const App = () => {
     const [darkMode, setDarkMode] = useState(false);
     const [userName, setUserName] = useState("");
+
+    useEffect(() => {
+        if (userName !== "") {
+            localStorage.setItem(PATH + " " + USERNAMEPATH, userName);
+        }
+        if (localStorage.getItem(PATH + " " + USERNAMEPATH)) {
+            setUserName(localStorage.getItem(PATH + " " + USERNAMEPATH));
+        }
+    }, [userName]);
 
     return (
         <ThemeProvider theme={darkMode ? darkTheme : lightTheme}>

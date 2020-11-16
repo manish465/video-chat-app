@@ -18,7 +18,7 @@ const useStyles = makeStyles({
     },
 });
 
-const FrontCanvas = () => {
+const FrontCanvas = ({ userName }) => {
     const classes = useStyles();
 
     return (
@@ -47,6 +47,7 @@ const FrontCanvas = () => {
                 <Grid item>
                     <Button
                         component={Link}
+                        disabled={userName === ""}
                         to='/call'
                         className={classes.button}>
                         <OneOne
@@ -58,7 +59,9 @@ const FrontCanvas = () => {
                     </Button>
                 </Grid>
                 <Grid item>
-                    <Button className={classes.button}>
+                    <Button
+                        disabled={userName === ""}
+                        className={classes.button}>
                         <GroupConf
                             style={{ width: "30px", marginRight: "30px" }}
                         />

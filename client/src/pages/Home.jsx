@@ -11,7 +11,7 @@ const Home = ({ userName, darkMode, setDarkMode }) => {
                 darkMode={darkMode}
                 setDarkMode={setDarkMode}
             />
-            <FrontCanvas />
+            <FrontCanvas userName={userName} />
         </>
     );
 };
