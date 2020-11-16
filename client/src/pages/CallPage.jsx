@@ -153,6 +153,26 @@ const CallPage = () => {
         </>
     );
 
+    const controlPanal = (
+        <>
+            <ButtonGroup className={classes.inCallButtonGroup}>
+                <Button onClick={() => setVideo(!video)}>
+                    {video ? <VideocamOffIcon /> : <VideocamIcon />}
+                </Button>
+                <Button onClick={() => setAudio(!audio)}>
+                    {audio ? <MicOffIcon /> : <MicNoneIcon />}
+                </Button>
+                <Button
+                    onClick={() => setCallAccepted(false)}
+                    disabled={!callAccepted}
+                    color='secondary'
+                    variant='contained'>
+                    <CallEndIcon />
+                </Button>
+            </ButtonGroup>
+        </>
+    );
+
     return (
         <>
             <video
@@ -173,22 +193,7 @@ const CallPage = () => {
             ) : (
                 callList
             )}
-            <ButtonGroup className={classes.inCallButtonGroup}>
-                <Button onClick={() => setVideo(!video)}>
-                    {video ? <VideocamOffIcon /> : <VideocamIcon />}
-                </Button>
-                <Button onClick={() => setAudio(!audio)}>
-                    {audio ? <MicOffIcon /> : <MicNoneIcon />}
-                </Button>
-                <Button
-                    onClick={() => setCallAccepted(false)}
-                    disabled={!callAccepted}
-                    color='secondary'
-                    variant='contained'>
-                    <CallEndIcon />
-                </Button>
-            </ButtonGroup>
-
+            {controlPanal}
             {receivingCall ? incomingCall : null}
         </>
     );
