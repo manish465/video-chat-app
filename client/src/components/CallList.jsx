@@ -2,12 +2,9 @@ import React from "react";
 
 import { Typography, Button } from "@material-ui/core";
 
-import CallEndIcon from "@material-ui/icons/CallEnd";
-import CallIcon from "@material-ui/icons/Call";
-
 import useStyles from "../styles/style";
 
-const CallList = ({ users, yourID, setCallOption, callPeer, callOption }) => {
+const CallList = ({ users, yourID, callPeer }) => {
     const classes = useStyles();
 
     return (
@@ -17,13 +14,10 @@ const CallList = ({ users, yourID, setCallOption, callPeer, callOption }) => {
                 id !== yourID ? (
                     <Button
                         className={classes.callListButton}
-                        onMouseEnter={() => setCallOption(true)}
-                        onMouseLeave={() => setCallOption(false)}
                         variant='contained'
                         key={key}
                         onClick={() => callPeer(id)}>
-                        <Typography>{id}</Typography>
-                        {callOption ? <CallIcon /> : <CallEndIcon />}
+                        <Typography>Call : {id}</Typography>
                     </Button>
                 ) : null,
             )}

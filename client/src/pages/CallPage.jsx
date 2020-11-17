@@ -16,8 +16,6 @@ const CallPage = () => {
     const partnerVideo = useRef();
     const socket = useRef();
 
-    const [callOption, setCallOption] = useState(false);
-
     const [present, setPresent] = useState(false);
 
     const [video, setVideo] = useState(true);
@@ -148,13 +146,7 @@ const CallPage = () => {
                     autoPlay
                 />
             ) : (
-                <CallList
-                    users={users}
-                    yourID={yourID}
-                    callPeer={callPeer}
-                    setCallOption={setCallOption}
-                    callOption={callOption}
-                />
+                <CallList users={users} yourID={yourID} callPeer={callPeer} />
             )}
             <ControlPanal
                 video={video}
