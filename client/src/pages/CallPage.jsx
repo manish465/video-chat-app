@@ -9,7 +9,7 @@ import useStyles from "../styles/style";
 
 const PATH = "http://localhost:8000";
 
-const CallPage = () => {
+const CallPage = ({ userName }) => {
     const classes = useStyles();
 
     const userVideo = useRef();

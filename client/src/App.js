@@ -26,23 +26,19 @@ const App = () => {
     return (
         <ThemeProvider theme={darkMode ? themes.darkTheme : themes.lightTheme}>
             <CssBaseline />
-            <Route
-                exact
-                path='/'
-                component={() => (
-                    <Home
-                        userName={userName}
-                        darkMode={darkMode}
-                        setDarkMode={setDarkMode}
-                    />
-                )}
-            />
-            <Route
-                exact
-                path='/gen-id'
-                component={() => <GenId setUserName={setUserName} />}
-            />
-            <Route exact path='/call' component={CallPage} />
+            <Route exact path='/'>
+                <Home
+                    userName={userName}
+                    darkMode={darkMode}
+                    setDarkMode={setDarkMode}
+                />
+            </Route>
+            <Route exact path='/gen-id'>
+                <GenId setUserName={setUserName} />
+            </Route>
+            <Route exact path='/call'>
+                <CallPage userName={userName} />
+            </Route>
         </ThemeProvider>
     );
 };
