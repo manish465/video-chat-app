@@ -49,7 +49,6 @@ const CallPage = () => {
                 .then((stream) => {
                     if (userVideo.current) {
                         setStream(stream);
-                        console.log(stream);
                         userVideo.current.srcObject = stream;
                     }
                 })
@@ -98,7 +97,6 @@ const CallPage = () => {
         peer.on("stream", (stream) => {
             if (partnerVideo.current) {
                 partnerVideo.current.srcObject = stream;
-                console.log(caller);
             }
         });
 
