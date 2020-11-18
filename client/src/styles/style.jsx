@@ -33,16 +33,22 @@ export default makeStyles({
         borderRadius: "10px",
         marginBottom: "20px",
     },
-    paper: {
-        margin: "10% 25%",
-        height: "30vh",
+    container_banner: {
+        width: "90%",
+        height: "100%",
     },
-    text: {
-        marginTop: "65px",
-        marginLeft: "170px",
+    container: {
+        height: "100vh",
+        padding: "40px",
     },
-    buttonGen: {
-        marginTop: "70px",
-        marginLeft: "20px",
+    container_paper: {
+        width: "100%",
+        height: "270px",
+        padding: "60px",
+        borderRadius: "20px",
+        background: "#ffffff",
+    },
+    container_paper_button: {
+        marginTop: "40px",
     },
 });

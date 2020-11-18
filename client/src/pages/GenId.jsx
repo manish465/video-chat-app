@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 
-import { Paper, TextField, Button } from "@material-ui/core";
+import { Paper, TextField, Button, Grid, Box } from "@material-ui/core";
+
+import { ReactComponent as Banner } from "../asset/Banner/userPage.svg";
 
 import SaveIcon from "@material-ui/icons/Save";
 
@@ -10,29 +12,31 @@ import useStyles from "../styles/style";
 
 const GenId = ({ setUserName }) => {
     const classes = useStyles();
+
     const [text, setText] = useState("");
 
     return (
-        <Paper className={classes.paper} variant='outlined'>
-            <TextField
-                value={text}
-                onChange={(event) => {
-                    setText(event.target.value);
-                }}
-                className={classes.text}
-                variant='outlined'
-                label='Enter User Name'
-            />
-            <Button
-                component={Link}
-                onClick={() => setUserName(text)}
-                to='/'
-                size='large'
-                variant='contained'
-                className={classes.buttonGen}>
-                <SaveIcon />
-            </Button>
-        </Paper>
+        <Grid className={classes.container} container alignItems='center'>
+            <Grid item xs={6}>
+                <Banner className={classes.container_banner} />
+            </Grid>
+            <Grid item xs={6}>
+                <Paper variant='outlined' className={classes.container_paper}>
+                    <TextField
+                        fullWidth
+                        variant='outlined'
+                        label='Enter Your Username'
+                    />
+                    <Button
+                        color='primary'
+                        className={classes.container_paper_button}
+                        variant='contained'
+                        fullWidth>
+                        <SaveIcon fontSize='large' />
+                    </Button>
+                </Paper>
+            </Grid>
+        </Grid>
     );
 };
 
