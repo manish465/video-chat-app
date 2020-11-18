@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import { Paper, TextField, Button, Grid, Box } from "@material-ui/core";
+import { Paper, TextField, Button, Grid } from "@material-ui/core";
 
 import { ReactComponent as Banner } from "../asset/Banner/userPage.svg";
 
