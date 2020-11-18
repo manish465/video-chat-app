@@ -4,7 +4,7 @@ import { Paper, TextField, Button, Grid, Box } from "@material-ui/core";
 
 import { ReactComponent as Banner } from "../asset/Banner/userPage.svg";
 
-import SaveIcon from "@material-ui/icons/Save";
+import SaveOutlinedIcon from "@material-ui/icons/SaveOutlined";
 
 import { Link } from "react-router-dom";
 
@@ -23,16 +23,23 @@ const GenId = ({ setUserName }) => {
             <Grid item xs={6}>
                 <Paper variant='outlined' className={classes.container_paper}>
                     <TextField
+                        value={text}
+                        onChange={(event) => {
+                            setText(event.target.value);
+                        }}
                         fullWidth
                         variant='outlined'
                         label='Enter Your Username'
                     />
                     <Button
+                        component={Link}
+                        onClick={() => setUserName(text)}
+                        to='/'
                         color='primary'
                         className={classes.container_paper_button}
                         variant='contained'
                         fullWidth>
-                        <SaveIcon fontSize='large' />
+                        <SaveOutlinedIcon fontSize='large' />
                     </Button>
                 </Paper>
             </Grid>
