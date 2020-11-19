@@ -7,7 +7,7 @@ import { ControlPanal, CallList, IncomingCall } from "../components";
 
 import useStyles from "../styles/style";
 
-const PATH = "http://localhost:8000";
+const PATH = "http://localhost:8000/call";
 
 const CallPage = ({ userName }) => {
     const classes = useStyles();
