@@ -5,8 +5,10 @@ const io = require("socket.io")(http);
 const port = process.env.PORT || 8000;
 
 const users = {};
+const rooms = [];
 
 const call = io.of("/call");
+const group = io.of("/group");
 
 call.on("connection", (socket) => {
     console.log(`user ${socket.id} joined`);
@@ -39,6 +41,13 @@ call.on("connection", (socket) => {
         socket.broadcast.emit("user left");
         delete users[socket.id];
         call.emit("allUsers", users);
+    });
+});
+
+group.on("connection", (socket) => {
+    socket.on("create room", (id) => {
+        rooms.push(id);
+        group.emit("all room", rooms);
     });
 });
 
