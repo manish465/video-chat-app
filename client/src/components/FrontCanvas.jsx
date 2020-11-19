@@ -52,6 +52,8 @@ const FrontCanvas = ({ userName }) => {
                 </Grid>
                 <Grid item>
                     <Button
+                        component={Link}
+                        to='/group'
                         disabled={userName === ""}
                         className={classes.button}>
                         <GroupConf

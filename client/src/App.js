@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Route } from "react-router-dom";
 
-import { Home, CallPage, GenId } from "./pages";
+import { Home, CallPage, GenId, GroupChat, GroupChatRoom } from "./pages";
 
 import themes from "./styles/theme";
 
@@ -38,6 +38,12 @@ const App = () => {
             </Route>
             <Route exact path='/call'>
                 <CallPage userName={userName} />
+            </Route>
+            <Route exact path='/group'>
+                <GroupChat />
+            </Route>
+            <Route exact path='/group/:room'>
+                <GroupChatRoom />
             </Route>
         </ThemeProvider>
     );
