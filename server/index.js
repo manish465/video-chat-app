@@ -47,9 +47,10 @@ call.on("connection", (socket) => {
 group.on("connection", (socket) => {
     socket.on("create room", (id) => {
         rooms.push(id);
-        console.log(`${id} room created`);
+        console.log(`${id} room was created`);
         group.emit("all room", rooms);
     });
+
     rooms.forEach((room) => {
         const chatRoom = io.of(`/group/${room}`);
 
