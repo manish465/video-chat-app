@@ -49,13 +49,12 @@ group.on("connection", (socket) => {
         rooms.push(id);
         console.log(`${id} room created`);
         group.emit("all room", rooms);
+    });
+    rooms.forEach((room) => {
+        const chatRoom = io.of(`/group/${room}`);
 
-        rooms.forEach((room) => {
-            const chatRoom = io.of(`/group/${room}`);
-
-            chatRoom.on("connection", (socket) => {
-                console.log(socket.id);
-            });
+        chatRoom.on("connection", (socket) => {
+            console.log(socket.id);
         });
     });
 });
