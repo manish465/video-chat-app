@@ -51,4 +51,18 @@ export default makeStyles({
     container_paper_button: {
         marginTop: "40px",
     },
+    group_chat_create_room: {
+        margin: "20px 100px",
+        padding: "30px 50px",
+    },
+    group_chat_create_room_create_button: {
+        margin: "20px 0",
+    },
+    group_chat_available_room: {
+        margin: "10px 100px",
+        padding: "20px",
+    },
+    group_chat_available_room_button: {
+        margin: "5px 0",
+    },
 });
