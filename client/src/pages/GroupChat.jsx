@@ -4,7 +4,7 @@ import io from "socket.io-client";
 
 import { Button, Paper, TextField, Typography } from "@material-ui/core";
 
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 
 import { v4 as uuidv4 } from "uuid";
 
@@ -36,11 +36,12 @@ const GroupChat = () => {
                     variant='outlined'
                 />
                 <Button
+                    component={Link}
+                    to={history.location.pathname + "/" + roomID}
                     className={classes.group_chat_create_room_create_button}
                     variant='contained'
                     fullWidth
                     onClick={() => {
-                        history.push(`/group/${roomID}`);
                         socket.current.emit("create room", roomID);
                     }}>
                     Create a chat room
