@@ -24,7 +24,7 @@ const GroupChat = () => {
 
     useEffect(() => {
         socket.current = io.connect(PATH);
-        socket.current.on("all room", (room) => setRooms(room));
+        socket.current.on("all room", (rooms) => setRooms(rooms));
     });
 
     return (
