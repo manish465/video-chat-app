@@ -11,6 +11,7 @@ const GroupChatRoom = () => {
         socket.current = io.connect(
             "http://localhost:8000" + history.location.pathname,
         );
+        console.log(socket.current.connected);
     }, [history]);
 
     return <div>GroupChatRoom</div>;

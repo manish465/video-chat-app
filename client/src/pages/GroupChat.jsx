@@ -51,6 +51,8 @@ const GroupChat = () => {
                 <Typography variant='h3'>Availabe Room:</Typography>
                 {rooms.map((room, key) => (
                     <Button
+                        component={Link}
+                        to={history.location.pathname + "/" + room}
                         className={classes.group_chat_available_room_button}
                         variant='contained'
                         fullWidth

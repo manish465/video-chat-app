@@ -54,7 +54,7 @@ group.on("connection", (socket) => {
         rooms.forEach((room) => {
             const chatRoom = io.of(`/group/${room}`);
             chatRoom.on("connection", (socket) => {
-                console.log(socket.id);
+                console.log(socket.connected);
             });
         });
     });
