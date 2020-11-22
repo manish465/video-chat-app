@@ -52,17 +52,17 @@ export default makeStyles({
         marginTop: "40px",
     },
     group_chat_create_room: {
-        margin: "20px 100px",
-        padding: "30px 50px",
+        margin: "5% 10%",
+        padding: "2% 5%",
     },
     group_chat_create_room_create_button: {
-        margin: "20px 0",
+        margin: "0.5% 0",
     },
     group_chat_available_room: {
-        margin: "10px 100px",
-        padding: "20px",
+        margin: "5% 10%",
+        padding: "1%",
     },
     group_chat_available_room_button: {
-        margin: "5px 0",
+        margin: "0.5% 0",
     },
 });
